@@ -355,7 +355,7 @@ def create_image_grid(images, centers, output_directory, grid_name='pupil_center
     for ax, (image_file, img), center in zip(axs, images, centers):
 
         center_shifted = (center[0], center[1]) if center else None
-
+        print("Debug", center)
         if center_shifted:
             img_color = cv.cvtColor(img, cv.COLOR_GRAY2BGR)
             cv.circle(img_color, (int(center_shifted[0]), int(center_shifted[1])), 5, (0, 0, 255), -1)
