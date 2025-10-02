@@ -559,11 +559,15 @@ def plot_least_squares_plane(ax, results_dict,dataset, coor):
     
     x_grid, y_grid = np.meshgrid(np.linspace(min(x_train), max(x_train), 20), np.linspace(min(y_train), max(y_train), 20))
     if coor == 'y':
-        z_grid = coeffs_y[1] * x_grid + coeffs_y[2] * y_grid + coeffs_y[0] 
-        z_train = x_train * coeffs_y[1]+y_train * coeffs_y[2]+coeffs_y[0]
+        #z_grid = coeffs_y[1] * x_grid + coeffs_y[2] * y_grid + coeffs_y[0]
+        z_grid = coeffs_y[0] * x_grid + coeffs_y[1] * y_grid + coeffs_y[2]  
+        #z_train = x_train * coeffs_y[1]+y_train * coeffs_y[2]+coeffs_y[0]
+        z_train = x_train * coeffs_y[0]+y_train * coeffs_y[1]+coeffs_y[2]
     else:
-        z_grid = coeffs_x[1] * x_grid + coeffs_x[2] * y_grid + coeffs_x[0]
-        z_train = x_train * coeffs_x[1]+y_train * coeffs_x[2]+coeffs_x[0]
+        #z_grid = coeffs_x[1] * x_grid + coeffs_x[2] * y_grid + coeffs_x[0]
+        z_grid = coeffs_x[0] * x_grid + coeffs_x[1] * y_grid + coeffs_x[2]
+        #z_train = x_train * coeffs_x[1]+y_train * coeffs_x[2]+coeffs_x[0]
+        z_train = x_train * coeffs_x[0]+y_train * coeffs_x[1]+coeffs_x[2]
     
     ax.scatter(x_train, y_train, z_train, color=colors[0], s=50, label='Training data')
 
@@ -621,6 +625,7 @@ def plot_from_results_dict(results_dict, training_data):
     coeffs_y = results_dict['model_y']
     p_test_x = results_dict['predicted'][:, 0]
     p_test_y = results_dict['predicted'][:, 1]
+    s_test_x = results_dict['ground_truth'][:, 0]
     s_test_y = results_dict['ground_truth'][:, 1]
 
 
